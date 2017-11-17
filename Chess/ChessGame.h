@@ -41,7 +41,7 @@ public:
 		Starts the chess game and runs it to completion
 		@param printBoard if true, print board between each turn for debugging purposes
 	*/
-	void runGame(bool printBoard);
+	void runGame();
 
 private:
 
@@ -90,8 +90,7 @@ private:
 	void initSide(TEAM_COLOR color);
 
 	/*
-	Displays an ASCII representation of the chess board used for
-	debugging purposes
+	Displays an ASCII representation of the chess board
 	*/
 	void printBoard() const;
 	

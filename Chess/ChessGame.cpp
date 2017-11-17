@@ -24,7 +24,7 @@ ChessGame::~ChessGame() {
 	}
 }
 
-void ChessGame::runGame(bool printBoard) {
+void ChessGame::runGame() {
 
 	ChessPlayer* currentPlayer = whitePlayer;
 	ChessPlayer* otherPlayer = blackPlayer;
@@ -32,7 +32,7 @@ void ChessGame::runGame(bool printBoard) {
 	initBoard();
 
 	for (;;) {
-		if(printBoard) this->printBoard();
+		printBoard();
 
 		if (canMove(currentPlayer)) {
 			handlePlayersTurn(currentPlayer);
@@ -173,30 +173,9 @@ const char* IllegalMoveException::what() const {
 	return msg.str().c_str();
 }
 
-void printUsage(const char* exeName) {
-	cout << "Usage: " << exeName << " [--print]" << endl;
-}
 
 int main(int argc, const char** args) {
-
-	bool printBoard = false;
-
-	if (argc > 2) {
-		printUsage(args[0]);
-		return -1;
-	}
-	else if (argc == 2) {
-		if (string(args[1]) == string("--print")) {
-			printBoard = true;
-		}
-		else {
-			printUsage(args[0]);
-			return -1;
-		}
-	}
-	
-	
-
+		
 	//TODO replace the arguments with pointers to your human
 	//input player class
 	//For example:
@@ -207,7 +186,7 @@ int main(int argc, const char** args) {
 	ChessGame game(nullptr, nullptr);
 
 
-	game.runGame(printBoard);
+	game.runGame();
 
 	int foobar;
 	cin >> foobar;
