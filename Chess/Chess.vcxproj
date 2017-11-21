@@ -112,6 +112,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ChessGame.cpp" />
+    <ClCompile Include="CommonTypes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChessGame.h" />

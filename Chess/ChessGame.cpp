@@ -162,17 +162,6 @@ void ChessGame::printBoard() const {
 	}
 }
 
-const char* IllegalMoveException::what() const {
-	stringstream msg;
-	Coordinate from = this->move.getFrom();
-	Coordinate to = this->move.getTo();
-	msg << "Illegale Move: " << from.getColumn() << from.getColumn() << " -> "
-		<< to.getColumn() << to.getColumn() << "." << endl
-		<< message;
-
-	return msg.str().c_str();
-}
-
 
 int main(int argc, const char** args) {
 		

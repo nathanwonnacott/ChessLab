@@ -34,18 +34,6 @@ enum TEAM_COLOR {
 	BLACK
 };
 
-/**
-	Overload of the insertion operator for TEAM_COLOR to output "WHITE" or "BLACK"
-*/
-ostream& operator<<(ostream& out, TEAM_COLOR team) {
-	if (team == WHITE) {
-		out << "WHITE";
-	}
-	else {
-		out << "BLACK";
-	}
-	return out;
-}
 
 /**
 Represents a square on a chess board (A-1 through H-8)
@@ -61,6 +49,14 @@ private:
 	unsigned short rowNumber;
 
 public:
+
+
+	/**
+	Compares two coordinates. The actual ordering of the coordinates is insignificant.
+	All that matters is that it is consistant and that two equal coordinates always
+	return false when passed into this method.
+	*/
+	bool operator<(const Coordinate& other) const;
 	/**
 		Instantiates a coordinate
 		@param columnLetter - the capital letter (A-H) representing the column of the square
@@ -101,20 +97,6 @@ public:
 		this->rowNumber = rowNumber;
 	}
 };
-
-/**
-	Compares two coordinates. The actual ordering of the coordinates is insignificant. 
-	All that matters is that it is consistant and that two equal coordinates always
-	return false when passed into this method.
-*/
-bool operator<(const Coordinate& lhs, const Coordinate& rhs) {
-	if (lhs.getColumn() != rhs.getColumn()) {
-		return lhs.getColumn() < rhs.getColumn();
-	}
-	else {
-		return lhs.getRow() < rhs.getRow();
-	}
-}
 
 /**
 	Represents a single move from one coordinate to another
@@ -169,15 +151,14 @@ Exception to be thrown whenever a move is attempted that is illegal or invalid
 */
 class IllegalMoveException : public exception {
 private:
-	Move move;
-	string message;
+	string fullMessage;
 public:
 	/**
 		Instantiates the exception
 		@param move the attempted illegal move
 		@param message short message explaining why the move was illegal
 	*/
-	IllegalMoveException(Move move, string message) : move(move), message(message) {}
+	IllegalMoveException(Move move, string message);
 	/**
 	@returns a message consisting of the move attempted and a message explaining why it was illegal
 	*/
