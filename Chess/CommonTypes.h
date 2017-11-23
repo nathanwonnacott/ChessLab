@@ -34,6 +34,8 @@ enum TEAM_COLOR {
 	BLACK
 };
 
+ostream& operator<<(ostream& out, TEAM_COLOR team);
+
 
 /**
 Represents a square on a chess board (A-1 through H-8)
