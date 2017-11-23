@@ -38,7 +38,7 @@ IllegalMoveException::IllegalMoveException(Move move, string message) {
 	Coordinate from = move.getFrom();
 	Coordinate to = move.getTo();
 
-	msgStream << "Illegal Move: " << from.getColumn() << from.getRow() << "-> "
+	msgStream << "Illegal Move: " << from.getColumn() << from.getRow() << "->"
 		<< to.getColumn() << to.getRow() << ". "
 		<< message;
 	fullMessage = msgStream.str();
