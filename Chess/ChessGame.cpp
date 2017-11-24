@@ -52,6 +52,7 @@ void ChessGame::runGame() {
 		//switch players
 		swap(currentPlayer, otherPlayer);
 	}
+	cout << "Game Over." << endl;
 }
 
 void ChessGame::handlePlayersTurn(ChessPlayer* currentPlayer, bool& isGameOver) {
