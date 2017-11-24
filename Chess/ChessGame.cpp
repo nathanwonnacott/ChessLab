@@ -115,8 +115,8 @@ void ChessGame::initSide(TEAM_COLOR color) {
 	currentState.insert(pair<Coordinate, Piece*>(Coordinate('G', backRow), new Piece(KNIGHT, color)));
 	currentState.insert(pair<Coordinate, Piece*>(Coordinate('C', backRow), new Piece(BISHOP, color)));
 	currentState.insert(pair<Coordinate, Piece*>(Coordinate('F', backRow), new Piece(BISHOP, color)));
-	currentState.insert(pair<Coordinate, Piece*>(Coordinate('D', backRow), new Piece(KING, color)));
-	currentState.insert(pair<Coordinate, Piece*>(Coordinate('E', backRow), new Piece(QUEEN, color)));
+	currentState.insert(pair<Coordinate, Piece*>(Coordinate('D', backRow), new Piece(QUEEN, color)));
+	currentState.insert(pair<Coordinate, Piece*>(Coordinate('E', backRow), new Piece(KING, color)));
 }
 
 void ChessGame::printBoard() const {
