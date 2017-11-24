@@ -107,6 +107,14 @@ class Move {
 private:
 	const Coordinate fromCoordinate;
 	const Coordinate toCoordinate;
+	const bool quit;
+
+	/** Private constructor that creates a Move object where isQuit
+		returns true. The from and to coordinates are meaningless
+		This constructor should only be called by the static method
+		getQuitMove().
+	*/
+	Move() :fromCoordinate('A',1), toCoordinate('A',2), quit(true){}
 
 public:
 	/** Creates a move from one coordinate to another 
@@ -115,12 +123,21 @@ public:
 	*/
 	Move(Coordinate fromCoordinate, Coordinate toCoordinate) :
 		fromCoordinate(fromCoordinate),
-		toCoordinate(toCoordinate) {}
+		toCoordinate(toCoordinate) ,
+		quit(false){}
 
 	/**@return the starting coordinate for this move*/
 	Coordinate getFrom() const { return fromCoordinate; }
 	/**@return the destination coordinate for this move */
 	Coordinate getTo() const { return toCoordinate; }
+
+	/** Constructs and returns a move indicating that the player would like to quit */
+	const static Move getQuitMove() { return Move(); }
+
+	/**@return true if the player chose to quit. If this is true,
+	then all other members of this class should be ignored*/
+	bool isQuit() const { return isQuit; }
+
 };
 
 /**

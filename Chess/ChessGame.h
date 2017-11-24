@@ -66,8 +66,10 @@ private:
 
 	/**
 		executes one turn for the specified player
+		@param player the player whose turn it is
+		@param isGameOver set to true if the player chose to quit the game
 	*/
-	void handlePlayersTurn(ChessPlayer* player);
+	void handlePlayersTurn(ChessPlayer* player, bool& isGameOver);
 
 	/**
 		Attempts to perform the specified move for the specified player

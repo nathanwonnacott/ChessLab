@@ -31,21 +31,22 @@ void ChessGame::runGame() {
 
 	initBoard();
 
-	for (;;) {
+	bool gameOver = false;
+	while (!gameOver) {
 		printBoard();
 
 		if (canMove(currentPlayer)) {
-			handlePlayersTurn(currentPlayer);
+			handlePlayersTurn(currentPlayer, gameOver);
 		}
 		else {
-			//The game is over
+			//If the player can't move, the game is over
 			if (isInCheck(currentPlayer, currentState)) {
 				cout << "CHECK MATE! " << otherPlayer->getColor() << " WINS!" << endl;
 			}
 			else {
 				cout << "STALE MATE!" << endl;
 			}
-			break;
+			gameOver = true;
 		}
 
 		//switch players
@@ -53,14 +54,21 @@ void ChessGame::runGame() {
 	}
 }
 
-void ChessGame::handlePlayersTurn(ChessPlayer* currentPlayer) {
+void ChessGame::handlePlayersTurn(ChessPlayer* currentPlayer, bool& isGameOver) {
 	bool moveCompleted = false;
 	bool isTryAgain = false;
+	isGameOver = false;
 
 	while (!moveCompleted) {
 
 		try {
 			Move move = currentPlayer->getMove(currentState, isTryAgain);
+
+			if (move.isQuit()) {
+				isGameOver = true;
+				break;
+			}
+
 			performMove(currentPlayer, move);
 			moveCompleted = true;
 		}
