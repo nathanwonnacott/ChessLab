@@ -35,16 +35,18 @@ void ChessGame::runGame() {
 	while (!gameOver) {
 		printBoard();
 
+		bool inCheck = isInCheck(currentPlayer, currentState);
+
 		if (canMove(currentPlayer)) {
-			handlePlayersTurn(currentPlayer, gameOver);
-			
-			if (isInCheck(otherPlayer, currentState)) {
+
+			if (inCheck) {
 				cout << "CHECK!" << endl;
 			}
+			handlePlayersTurn(currentPlayer, gameOver);
 		}
 		else {
 			//If the player can't move, the game is over
-			if (isInCheck(currentPlayer, currentState)) {
+			if (inCheck) {
 				cout << "CHECK MATE! " << otherPlayer->getColor() << " WINS!" << endl;
 			}
 			else {
