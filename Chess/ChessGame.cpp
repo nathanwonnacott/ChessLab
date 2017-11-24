@@ -37,6 +37,10 @@ void ChessGame::runGame() {
 
 		if (canMove(currentPlayer)) {
 			handlePlayersTurn(currentPlayer, gameOver);
+			
+			if (isInCheck(otherPlayer, currentState)) {
+				cout << "CHECK!" << endl;
+			}
 		}
 		else {
 			//If the player can't move, the game is over
