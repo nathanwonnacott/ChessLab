@@ -134,9 +134,9 @@ public:
 	/** Constructs and returns a move indicating that the player would like to quit */
 	const static Move getQuitMove() { return Move(); }
 
-	/**@return true if the player chose to quit. If this is true,
+	/**@return true if the player chose to quit. If thAAis is true,
 	then all other members of this class should be ignored*/
-	bool isQuit() const { return isQuit; }
+	bool isQuit() const { return quit; }
 
 };
 
