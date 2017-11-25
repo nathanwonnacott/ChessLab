@@ -164,9 +164,9 @@ public:
 	Piece(PIECE_TYPE pieceType, TEAM_COLOR team) : pieceType(pieceType), team(team) {}
 	virtual ~Piece() {}
 	/***@return the piece type*/
-	PIECE_TYPE getPieceType() { return pieceType; }
+	PIECE_TYPE getPieceType() const { return pieceType; }
 	/**@return the piece team */
-	TEAM_COLOR getTeam() { return team; }
+	TEAM_COLOR getTeam() const { return team; }
 };
 
 /**

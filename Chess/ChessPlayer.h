@@ -52,7 +52,7 @@ public:
 	a move that was illegal and the game controller is now attempting for a second time to get a valid
 	move. This is useful for indicating to the player that whatever it attempted previously was not valid
 	*/
-	virtual Move getMove(map<Coordinate, Piece*> currentState, bool isTryAgain) = 0;
+	virtual Move getMove(map<Coordinate, const Piece*> currentState, bool isTryAgain) = 0;
 
 	/**@return the color of this player */
 	TEAM_COLOR getColor() const { return color; }

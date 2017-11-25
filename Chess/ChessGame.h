@@ -25,7 +25,7 @@ private:
 	/** Map from coordinates on the board to the piece contained on each coordinate.
 	This contains every piece currently on the board
 	*/
-	map<Coordinate, Piece*> currentState;
+	map<Coordinate, const Piece*> currentState;
 
 public:
 	/**
@@ -57,7 +57,7 @@ private:
 		@param the state of the board to evaluate
 		@return true if the specified player is currently in check
 	*/
-	bool isInCheck(ChessPlayer* player, const map<Coordinate, Piece*>& boardState) const;
+	bool isInCheck(ChessPlayer* player, const map<Coordinate, const Piece*>& boardState) const;
 
 	/**
 		@return true if the specified player can move (note that a player may not

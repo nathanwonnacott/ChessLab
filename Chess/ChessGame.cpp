@@ -92,7 +92,7 @@ void ChessGame::handlePlayersTurn(ChessPlayer* currentPlayer, bool& isGameOver) 
 	}
 }
 
-bool ChessGame::isInCheck(ChessPlayer* player, const map<Coordinate, Piece*>& boardState) const {
+bool ChessGame::isInCheck(ChessPlayer* player, const map<Coordinate, const Piece*>& boardState) const {
 	//TODO to be completed by student
 	return false;
 }
