@@ -167,54 +167,83 @@ void ChessGame::initBoard(string fileName) {
 }
 
 void ChessGame::printBoard() const {
-	cout << "  ABCDEFGH" << endl
-		 << " +--------" << endl;
+	cout << "  |  A  |  B  |  C  |  D  |  E  |  F  |  G  |  H  |" << endl
+		 << "--+-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
 	for (unsigned short row = 8; row >= 1; row--) {
-		cout << row << '|';
+
+		//Top line of each row contains color of chess
+		//board if no piece is present, or text describing
+		//color of piece if a piece is present
+		cout << "  |";
 		
 		for (char column = 'A'; column <= 'H'; column++) {
-			char square = ' ';
+			string output("     ");
 			if ((row + column) % 2 == 0) {
-				square = '*';
+				output = "#####";
 			}
 
-			Coordinate currentCoord(column, row);
-			if (currentState.find(currentCoord) != currentState.end()) {
-				//The map contains the current coordinate
-				//We want to print the corresponding character
-				Piece* piece = currentState.at(currentCoord);
-				switch (piece->getPieceType()) {
-				case PAWN:
-					square = 'P';
-					break;
-				case ROOK:
-					square = 'R';
-					break;
-				case KNIGHT:
-					square = 'H';
-					break;
-				case BISHOP:
-					square = 'B';
-					break;
+			auto pieceInSquareIter = currentState.find(Coordinate(column, row));
+
+			if (pieceInSquareIter != currentState.end()) {
+				output = (pieceInSquareIter->second->getTeam() == WHITE) ? "White" : "Black";
+			}
+
+			cout << output << "|";
+		}
+		cout << endl;
+
+		//Second line contains the Piece if present
+		cout << row << " |";
+		for (char column = 'A'; column <= 'H'; column++) {
+			string output("     ");
+			if ((row + column) % 2 == 0) {
+				output = "#####";
+			}
+
+			auto pieceInSquareIter = currentState.find(Coordinate(column, row));
+
+			if (pieceInSquareIter != currentState.end()) {
+				switch (pieceInSquareIter->second->getPieceType()) {
 				case KING:
-					square = 'K';
+					output = "King ";
 					break;
 				case QUEEN:
-					square = 'Q';
+					output = "Queen";
 					break;
-				default:
-					square = '?';
+				case ROOK:
+					output = "Rook ";
+					break;
+				case BISHOP:
+					output = "Bisho";
+					break;
+				case KNIGHT:
+					output = "Knigh";
+					break;
+				case PAWN:
+					output = "Pawn ";
+					break;
 				}
-
-				if (piece->getTeam() == BLACK) {
-					square += ('a' - 'A'); //convert to lower case
-				}
-
 			}
-			cout << square;
-		}
 
+			cout << output << "|";
+		}
 		cout << endl;
+
+		//Third line is just the color of the square
+		cout << "  |";
+
+		for (char column = 'A'; column <= 'H'; column++) {
+			string output("     ");
+			if ((row + column) % 2 == 0) {
+				output = "#####";
+			}
+			cout << output << "|";
+		}
+		cout << endl;
+
+		//Finally draw the gridline
+		cout << "--+-----+-----+-----+-----+-----+-----+-----+-----+" << endl;
+
 	}
 }
 
@@ -241,8 +270,6 @@ int main(int argc, const char** args) {
 
 	game.runGame();
 
-	int foobar;
-	cin >> foobar;
 	return 0;
 }
 
