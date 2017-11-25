@@ -119,6 +119,9 @@
     <ClInclude Include="ChessPlayer.h" />
     <ClInclude Include="CommonTypes.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="OneOfEachPiece.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

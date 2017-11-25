@@ -10,12 +10,20 @@
 #include "ChessGame.h"
 #include <sstream>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
-ChessGame::ChessGame(ChessPlayer* whitePlayer, ChessPlayer* blackPlayer) {
+ChessGame::ChessGame(string startupFile, ChessPlayer* whitePlayer, ChessPlayer* blackPlayer) {
 	this->whitePlayer = whitePlayer;
 	this->blackPlayer = blackPlayer;
+
+	if (startupFile.length() == 0) {
+		initBoard();
+	}
+	else {
+		initBoard(startupFile);
+	}
 }
 
 ChessGame::~ChessGame() {
@@ -28,8 +36,6 @@ void ChessGame::runGame() {
 
 	ChessPlayer* currentPlayer = whitePlayer;
 	ChessPlayer* otherPlayer = blackPlayer;
-
-	initBoard();
 
 	bool gameOver = false;
 	while (!gameOver) {
@@ -125,6 +131,41 @@ void ChessGame::initSide(TEAM_COLOR color) {
 	currentState.insert(pair<Coordinate, Piece*>(Coordinate('E', backRow), new Piece(KING, color)));
 }
 
+void ChessGame::initBoard(string fileName) {
+
+	ifstream input;
+	input.open(fileName);
+
+	if (!input) {
+		cerr << "Could not open the file " << fileName << endl
+			<< "Reverting to the default chess setup" << endl;
+		initBoard();
+		return;
+	}
+
+	string line;
+	while (getline(input, line)) {
+		istringstream lineStream(line);
+		Coordinate coord('A', 1);
+		PIECE_TYPE type;
+		TEAM_COLOR color;
+		lineStream >> coord >> color >> type;
+
+		if (lineStream.fail()) {
+			cerr << "Error reading startup file." << endl
+				<< "Failed while reading line \"" << line << "\"" << endl
+				<< "Reverting to the default chess setup" << endl;
+			currentState.clear();
+			initBoard();
+			return;
+		}
+
+		Piece* piece = new Piece(type, color);
+		currentState.insert(pair<Coordinate, Piece*>(coord, piece));
+	}
+
+}
+
 void ChessGame::printBoard() const {
 	cout << "  ABCDEFGH" << endl
 		 << " +--------" << endl;
@@ -179,16 +220,24 @@ void ChessGame::printBoard() const {
 
 
 int main(int argc, const char** args) {
+
+	cout << "Enter path to starting conditions file, or \"None\" for standard setup:";
+
+	string startupFileName;
+	cin >> startupFileName;
+
+	if (startupFileName == "None" || startupFileName == "none") {
+		startupFileName = "";
+	}
 		
 	//TODO replace the arguments with pointers to your human
 	//input player class
 	//For example:
 	//HumanPlayer whitePlayer(WHITE)
 	//HumanPlayer blackPlayer(BLACK)
-	//ChessGame game(&whitePlayer, &blackPlayer);
+	//ChessGame game(startupFileName, &whitePlayer, &blackPlayer);
 
-	ChessGame game(nullptr, nullptr);
-
+	ChessGame game(startupFileName, nullptr, nullptr);
 
 	game.runGame();
 

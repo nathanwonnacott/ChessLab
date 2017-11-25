@@ -23,6 +23,52 @@ ostream& operator<<(ostream& out, TEAM_COLOR team) {
 	return out;
 }
 
+istream& operator>>(istream& input, TEAM_COLOR& team) {
+	string strColor;
+	input >> strColor;
+
+	if (strColor == "WHITE") {
+		team = WHITE;
+	}
+	else if (strColor == "BLACK") {
+		team = BLACK;
+	}
+	else {
+		input.setstate(ios_base::failbit);
+	}
+	return input;
+}
+
+istream& operator>>(istream& input, PIECE_TYPE& piece) {
+	
+	string strPiece;
+	input >> strPiece;
+
+	if (strPiece == "PAWN") {
+		piece = PAWN;
+	}
+	else if (strPiece == "ROOK") {
+		piece = ROOK;
+	}
+	else if (strPiece == "KNIGHT") {
+		piece = KNIGHT;
+	}
+	else if (strPiece == "BISHOP") {
+		piece = BISHOP;
+	}
+	else if (strPiece == "KING") {
+		piece = KING;
+	}
+	else if (strPiece == "QUEEN") {
+		piece = QUEEN;
+	}
+	else {
+		input.setstate(ios_base::failbit);
+	}
+
+	return input;
+}
+
 bool Coordinate::operator<(const Coordinate& rhs) const {
 	if (this->getColumn() != rhs.getColumn()) {
 		return this->getColumn() < rhs.getColumn();
@@ -30,6 +76,27 @@ bool Coordinate::operator<(const Coordinate& rhs) const {
 	else {
 		return this->getRow() < rhs.getRow();
 	}
+}
+
+istream& operator>>(istream& input, Coordinate& coord) {
+	string str;
+	input >> str;
+
+	if (str.length() != 2) {
+		input.setstate(ios_base::failbit);
+	}
+	else {
+		try {
+			coord.setColumn(str.at(0));
+			coord.setRow((int)(str.at(1) - '0'));
+		}
+		catch (invalid_argument e) {
+			input.setstate(ios_base::failbit);
+		}
+	}
+
+	return input;
+
 }
 
 

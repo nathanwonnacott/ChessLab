@@ -35,6 +35,8 @@ enum TEAM_COLOR {
 };
 
 ostream& operator<<(ostream& out, TEAM_COLOR team);
+istream& operator>>(istream& input, TEAM_COLOR& team);
+istream& operator>>(istream& input, PIECE_TYPE& piece);
 
 
 /**
@@ -99,6 +101,8 @@ public:
 		this->rowNumber = rowNumber;
 	}
 };
+
+istream& operator>>(istream& in, Coordinate& coord);
 
 /**
 	Represents a single move from one coordinate to another

@@ -30,10 +30,11 @@ private:
 public:
 	/**
 		Instantiates a chess game with the specified players
+		@param startupFile file containing starting conditions for game. Empty string for default conditions
 		@param whitePlayer the white player (note that whitePlayer->getColor() must return WHITE)
 		@param blackPlayer the black player (note that blackPlayer->getColor() must return BLACK)
 	*/
-	ChessGame(ChessPlayer* whitePlayer, ChessPlayer* blackPlayer);
+	ChessGame(string startupFile, ChessPlayer* whitePlayer, ChessPlayer* blackPlayer);
 
 	virtual ~ChessGame();
 
@@ -90,6 +91,11 @@ private:
 		Sets up the initial positions of the pieces for an individual side
 	*/
 	void initSide(TEAM_COLOR color);
+
+	/**
+		Initializes the board based on the contents of the specified file
+	*/
+	void initBoard(string fileName);
 
 	/*
 	Displays an ASCII representation of the chess board
