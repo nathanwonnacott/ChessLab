@@ -185,7 +185,7 @@ public:
 	/**
 	@returns a message consisting of the move attempted and a message explaining why it was illegal
 	*/
-	virtual const char* what() const;
+	virtual const char* what() const noexcept;
 };
 
 #endif
