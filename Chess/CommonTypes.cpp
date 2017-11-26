@@ -109,9 +109,9 @@ IllegalMoveException::IllegalMoveException(Move move, string message) {
 		<< to.getColumn() << to.getRow() << ". "
 		<< message;
 	fullMessage = msgStream.str();
-
+		
 }
 
-const char* IllegalMoveException::what() const {
+const char* IllegalMoveException::what() const noexcept {
 	return fullMessage.c_str();
 }
